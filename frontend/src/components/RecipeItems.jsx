@@ -30,7 +30,7 @@ export default function RecipeItems() {
   const onDelete = async (e, id) => {
     e.stopPropagation();
     try {
-      await axios.delete(`http://localhost:5000/recipe/${id}`, {
+      await axios.delete(`https://foodrecipe-435j.onrender.com/recipe/${id}`, {
         headers: {
           authorization: "bearer " + localStorage.getItem("token")
         }
@@ -63,7 +63,7 @@ export default function RecipeItems() {
           onDoubleClick={() => navigate(`/recipe/${item._id}`)}
         >
           <img
-            src={item.coverImage ? `http://localhost:5000/images/${item.coverImage}` : foodImg}
+            src={item.coverImage ? `https://foodrecipe-435j.onrender.com/images/${item.coverImage}` : foodImg}
             onError={(e) => { e.currentTarget.src = foodImg; }}
             alt={item.title}
             width="120px"
