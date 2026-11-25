@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
 const connectDb = require("./config/connectionDB");
+const { getDbStatus } = connectDb;
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
@@ -23,7 +24,13 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.json({ status: "ok", message: "FoodRecipe API is running" });
+    const db = getDbStatus();
+    res.json({
+        status: "ok",
+        message: "FoodRecipe API is running",
+        dbConnected: db.connected,
+        ...(db.error ? { dbError: db.error } : {})
+    });
 });
 
 app.use("/", require("./routes/user"));
