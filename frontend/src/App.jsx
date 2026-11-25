@@ -6,10 +6,11 @@ import axios from 'axios';
 import AddFoodRecipe from './pages/AddFoodRecipe';
 import EditRecipe from './pages/EditRecipe';
 import RecipeDetails from './pages/RecipeDetails';
+import { API_URL } from './config';
 
 const getAllRecipes = async () => {
   try {
-    const res = await axios.get('https://foodrecipe-435j.onrender.com/recipe');
+    const res = await axios.get(`${API_URL}/recipe`);
     return res.data;
   } catch (err) {
     console.error("Failed to fetch recipes:", err);
@@ -39,11 +40,11 @@ const getFavRecipes = () => {
 
 const getRecipe = async ({ params }) => {
   try {
-    const recipeRes = await axios.get(`https://foodrecipe-435j.onrender.com/recipe/${params.id}`);
+    const recipeRes = await axios.get(`${API_URL}/recipe/${params.id}`);
     let recipe = recipeRes.data;
     if (recipe?.createdBy) {
       try {
-        const userRes = await axios.get(`https://foodrecipe-435j.onrender.com/user/${recipe.createdBy}`);
+        const userRes = await axios.get(`${API_URL}/user/${recipe.createdBy}`);
         recipe = { ...recipe, email: userRes.data.email };
       } catch {
         recipe = { ...recipe, email: "Unknown" };

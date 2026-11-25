@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 export default function InputForm({ setIsOpen }) {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ export default function InputForm({ setIsOpen }) {
     setError("");
     const endpoint = isSignUp ? "signUp" : "login";
     try {
-      const res = await axios.post(`https://foodrecipe-435j.onrender.com/${endpoint}`, { email, password });
+      const res = await axios.post(`${API_URL}/${endpoint}`, { email, password });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       window.dispatchEvent(new Event("authChange"));

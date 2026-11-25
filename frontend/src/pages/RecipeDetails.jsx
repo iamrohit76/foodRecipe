@@ -1,6 +1,7 @@
 import profileImg from '../assets/profile.png';
 import food from '../assets/foodRecipe.png';
 import { useLoaderData } from 'react-router-dom';
+import { API_URL } from '../config';
 
 export default function RecipeDetails() {
   const recipe = useLoaderData();
@@ -21,7 +22,7 @@ export default function RecipeDetails() {
       </div>
       <h3 className='title'>{recipe.title}</h3>
       <img
-        src={recipe.coverImage ? `http://localhost:5000/images/${recipe.coverImage}` : food}
+        src={recipe.coverImage ? `${API_URL}/images/${recipe.coverImage}` : food}
         onError={(e) => { e.currentTarget.src = food; }}
         alt={recipe.title}
         width="220px"

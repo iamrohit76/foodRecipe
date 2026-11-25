@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
 export default function AddFoodRecipe() {
   const [recipeData, setRecipeData] = useState({
@@ -31,7 +32,7 @@ export default function AddFoodRecipe() {
     }
 
     try {
-      await axios.post("http://localhost:5000/recipe", formData, {
+      await axios.post(`${API_URL}/recipe`, formData, {
         headers: {
           authorization: 'bearer ' + localStorage.getItem("token")
         }

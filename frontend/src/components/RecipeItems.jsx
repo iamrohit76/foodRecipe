@@ -6,6 +6,7 @@ import { FaHeart } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
+import { API_URL } from '../config';
 
 const getStoredFavs = () => {
   try {
@@ -30,7 +31,7 @@ export default function RecipeItems() {
   const onDelete = async (e, id) => {
     e.stopPropagation();
     try {
-      await axios.delete(`https://foodrecipe-435j.onrender.com/recipe/${id}`, {
+      await axios.delete(`${API_URL}/recipe/${id}`, {
         headers: {
           authorization: "bearer " + localStorage.getItem("token")
         }
@@ -63,7 +64,7 @@ export default function RecipeItems() {
           onDoubleClick={() => navigate(`/recipe/${item._id}`)}
         >
           <img
-            src={item.coverImage ? `https://foodrecipe-435j.onrender.com/images/${item.coverImage}` : foodImg}
+            src={item.coverImage ? `${API_URL}/images/${item.coverImage}` : foodImg}
             onError={(e) => { e.currentTarget.src = foodImg; }}
             alt={item.title}
             width="120px"
